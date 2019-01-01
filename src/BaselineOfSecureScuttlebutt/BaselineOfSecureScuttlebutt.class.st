@@ -116,10 +116,9 @@ BaselineOfSecureScuttlebutt >> baseline10: spec [
 		spec blessing: #'baseline'.
 		spec repository: 'http://www.squeaksource.com/ProfStef'.
 		spec configuration: 'OSSubprocess' with: [
-				spec
-					versionString: '1.0.0';
-					loads: #();
-					repository: 'http://smalltalkhub.com/mc/Pharo/MetaRepoForPharo60/main/OSSubprocess' ].
+                                    spec
+                                        versionString: #stable;
+                                        repository: 'github://marianopeck/OSSubprocess:master/repository' ].
 		spec package: 'SecureScuttlebutt' with: [
 				spec requires: #('OSSubprocess' ). ].
 		spec group: 'default' with: #('SecureScuttlebutt' ). ].
