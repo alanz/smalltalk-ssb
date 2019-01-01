@@ -12,7 +12,8 @@ SsbLatestReader class >> fromString: string [
 { #category : #parsing }
 SsbLatestReader >> nextTopList [
 	"Initial interface to parse a list of  '{..}' JSON values.
-	Return either primitives, a listClass or a mapClass instance."
+	Return either primitives, a listClass or a mapClass instance.
+	Based on NeoJSONReader>>next"
 	
 	^ self 
 		consumeWhitespace; 
@@ -32,22 +33,6 @@ SsbLatestReader >> parseListBare [
 ]
 
 { #category : #parsing }
-SsbLatestReader >> parseListBare: block [
-	"parse a list of bare JSON '{..}', separated by whitespace only, into a list.
-	Based on NeoJSONReader>>parseListDo:
-	"
-	"self expectChar: $[."
-	"(self matchChar: $]) 
-		ifTrue: [ ^ self ]."
-	[ readStream atEnd ] 
-		whileFalse: [
-			block value.
-          ].
-	^ self
-	
-]
-
-{ #category : #parsing }
 SsbLatestReader >> parseListBareDo: block [
 	"parse a list of bare JSON '{..}', separated by whitespace only, into a list.
 	Based on NeoJSONReader>>parseListDo:
@@ -59,14 +44,15 @@ SsbLatestReader >> parseListBareDo: block [
 		whileFalse: [
 			block value.
           ].
-	^ self
+   "For some reason, the required value is on the top of the stack (according to the debugger), but does not get returned."
+	"^ self"
 	
 ]
 
 { #category : #parsing }
 SsbLatestReader >> parseListElementsBareDo: block [
   "based on NeoJSONReader>>parseListElementsDo"
-	self parseListBare: [ 
+	self parseListBareDo: [ 
 		block value: self parseValue ]
 
 ]

@@ -5,6 +5,13 @@ Class {
 }
 
 { #category : #running }
+SecureScuttlebutt >> feedStream [
+	^ self
+		 runSbot: #('createFeedStream' '--reverse' '--limit=5')
+	 	"with: self latestParser"
+]
+
+{ #category : #running }
 SecureScuttlebutt >> latest [
 	^ self runSbot: 'latest' with: self latestParser
 
@@ -28,17 +35,24 @@ SecureScuttlebutt >> latestParser [
  	^[:str | SsbLatestReader fromString: str] 
 ]
 
+{ #category : #running }
+SecureScuttlebutt >> logStream [
+	^ self
+		 runSbot: #('createLogStream' '--reverse' '--limit=1')
+	 	 with: self latestParser
+]
+
 { #category : #printing }
 SecureScuttlebutt >> printOn [
 	^ 'SecureScuttlebutt'
 ]
 
 { #category : #running }
-SecureScuttlebutt >> runSbot: aCommand [
+SecureScuttlebutt >> runSbot: aCommandAndArgs [
 	| process |
 	process := OSSUnixSubprocess new
 		command: 'sbot';
-		arguments: {aCommand};
+		arguments: aCommandAndArgs ;
 		redirectStdout;
 		redirectStderr .
 	process runAndWait  .
@@ -56,11 +70,11 @@ SecureScuttlebutt >> runSbot: aCommand [
 ]
 
 { #category : #running }
-SecureScuttlebutt >> runSbot: aCommand with: aParser [
+SecureScuttlebutt >> runSbot: aCommandAndArgs with: aParser [
 	| process |
 	process := OSSUnixSubprocess new
 		command: 'sbot';
-		arguments: {aCommand};
+		arguments: aCommandAndArgs;
 		redirectStdout;
 		redirectStderr .
 	process runAndWait  .
@@ -79,5 +93,5 @@ SecureScuttlebutt >> runSbot: aCommand with: aParser [
 
 { #category : #running }
 SecureScuttlebutt >> whoami [
-	^ self runSbot: 'whoami'
+	^ self runSbot: #('whoami')
 ]
