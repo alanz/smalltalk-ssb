@@ -19,7 +19,7 @@ SecureScuttlebutt >> runSbot: aCommand [
 		redirectStderr .
 	process runAndWait  .
 	process isSuccess 
-		ifTrue: [ ^process stdoutStream upToEndOfFile ]
+		ifTrue: [ ^ NeoJSONReader fromString:  process stdoutStream upToEndOfFile ]
 		ifFalse: [
 			"OSSUnixProcessExitStatus has a nice #printOn: "
 			"
@@ -29,4 +29,9 @@ SecureScuttlebutt >> runSbot: aCommand [
 			self error
 		].
 
+]
+
+{ #category : #running }
+SecureScuttlebutt >> whoami [
+	^ self runSbot: 'whoami'
 ]
