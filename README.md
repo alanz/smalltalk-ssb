@@ -32,3 +32,9 @@ You should now be able to print
 ```smalltalk
 Sbot new whoami.
 ```
+
+
+Metacello new
+  baseline: 'SecureScuttlebutt';
+  repository: 'github://alanz/smalltalk-ssb:master';
+  load.

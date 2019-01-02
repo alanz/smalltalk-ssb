@@ -10,8 +10,10 @@ BaselineOfSecureScuttlebutt >> baseline: spec [
 	
 	spec for: #common do: [ 
 		spec
-			package: 'SecureScuttlebutt';
+			package: 'SecureScuttlebutt' with: [
+                        spec requires: 'NeoJSON';
+                             requires: 'OSSubprocess' ];
 			package: 'SecureScuttlebutt-DataModel';
-			package: 'SecureScuttlebutt-Tests' with: [ 
+			package: 'SecureScuttlebutt-Tests' with: [
 				spec requires: 'SecureScuttlebutt' ] ].
 ]
