@@ -6,26 +6,12 @@
 
 ### Installation
 
-From Catalog, install `NeoJSONReader` stable. Ignore warning about
-Pharo 7 not being supported.
-
-
-Install `OSssubProcess`:
-
-```
+```smalltalk
 Metacello new
- 	configuration: 'OSSubprocess';
- 	repository: 'github://marianopeck/OSSubprocess:master/repository';
-	version: #stable;
-	load.
+  baseline: 'SecureScuttlebutt';
+  repository: 'github://alanz/smalltalk-ssb:master';
+  load.
 ```
-
-Use `Iceberg` to clone https://github.com/alanz/ssb-smalltalk.
-
-Right-click on the repo in Iceberg, and select Packages. Install them
-all, one by one.
-
-[PRs gladly accepted on establishing a proper baseline for this]
 
 You should now be able to print
 
@@ -33,8 +19,10 @@ You should now be able to print
 Sbot new whoami.
 ```
 
+And at some point
 
-Metacello new
-  baseline: 'SecureScuttlebutt';
-  repository: 'github://alanz/smalltalk-ssb:master';
-  load.
+```smalltalk
+SbotUi open.
+```
+
+will do something useful.
