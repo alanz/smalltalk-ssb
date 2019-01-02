@@ -15,7 +15,7 @@ BaselineOfSecureScuttlebutt >> baseline: spec [
 	spec for: #common do: [
 		spec
 			baseline: 'NeoJSON' with: [spec repository:  'http://mc.stfx.eu/Neo'];
-			baseline: 'OSSsubprocess' with: [spec repository:  'github://marianopeck/OSSubprocess:master/repository'];
+			baseline: 'OSSsubprocess' with: [spec repository:  'github://marianopeck/OSSubprocess:master/repository
 		spec
 			package: 'SecureScuttlebutt' with: [
                         spec requires: 'NeoJSON';
