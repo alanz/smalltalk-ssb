@@ -53,12 +53,6 @@ SsbUi >> initializeWidgets [
 			group
 				addItem: [ :item | 
 					item
-						name: 'File';
-						icon: (self iconNamed: #openIcon);
-						subMenu: self subMenu ].
-			group
-				addItem: [ :item | 
-					item
 						name: nil;
 						description: 'Open file';
 						icon: (self iconNamed: #openIcon);
@@ -82,6 +76,8 @@ SsbUi >> initializeWidgets [
 					item
 						name: nil;
 						description: 'sbot status';
+						icon: (self iconNamed: #confirmIcon);
+
 						action: [ self text text: Sbot new status asString ] ] ];
 		addGroup: [ :group | 
 			group
@@ -114,38 +110,6 @@ SsbUi >> initializeWidgets [
 { #category : #initialization }
 SsbUi >> menu [
 	^ menu
-]
-
-{ #category : #initialization }
-SsbUi >> subMenu [ 
-
-	^ MenuPresenter new
-		addGroup: [ :group |
-			group addItem: [ :item |
-				item
-					name: 'Open';
-					icon: (self iconNamed: #openIcon);
-					shortcut: $o meta;
-					action: [ self inform: 'Open' ] ].
-			group addItem: [ :item |
-				item 
-					name: 'Save';
-					icon: (self iconNamed: #smallSaveIcon);
-					shortcut: $s meta;
-					action: [ self inform: 'Save' ] ].
-			group addItem: [ :item |
-				item 
-					name: 'Print';
-					shortcut: $p meta;
-					icon: (self iconNamed: #smallPrintIcon);
-					action: [ self inform: 'Print' ] ].
-			group addItem: [ :item |
-				item 
-					name: 'Kill';
-					shortcut: $k meta;
-					icon: (self iconNamed: #smallCancelIcon);
-					action: [ self inform: 'Kill' ] ] ]
-
 ]
 
 { #category : #accessing }
