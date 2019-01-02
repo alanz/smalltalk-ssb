@@ -1,11 +1,14 @@
+"
+I am SbotTest.
+"
 Class {
-	#name : #SecureScuttlebuttTest,
+	#name : #SbotTest,
 	#superclass : #TestCase,
 	#category : #'SecureScuttlebutt-Tests'
 }
 
 { #category : #'basic tests' }
-SecureScuttlebuttTest >> testLatestParser [
+SbotTest >> testLatestParser [
   | json expected |
   json := 
 '
@@ -29,6 +32,6 @@ expected :=
 	   asDictionary 
 	}.
 	self 
-		assert: ((SecureScuttlebutt new latestParser) value: json)
+		assert: ((Sbot new latestParser) value: json)
 		equals: expected
 ]

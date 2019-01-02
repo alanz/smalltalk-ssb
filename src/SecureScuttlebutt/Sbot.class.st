@@ -5,26 +5,28 @@ I interact with an operating system sbot, which is the secure scuttlebutt CLI
 
 "
 Class {
-	#name : #SecureScuttlebutt,
+	#name : #Sbot,
 	#superclass : #Object,
 	#category : #SecureScuttlebutt
 }
 
-{ #category : #running }
-SecureScuttlebutt >> feedStream [
+{ #category : #api }
+Sbot >> feedStream [
 	^ self
 		 runSbot: #('createFeedStream' '--reverse' '--limit=5')
 	 	"with: self latestParser"
 ]
 
-{ #category : #running }
-SecureScuttlebutt >> latest [
+{ #category : #api }
+Sbot >> latest [
+   "Warning: this will probably run for a *very* long time.
+   On my machine, it has to parse over 60 000 lines."
 	^ self runSbot: 'latest' with: self latestParser
 
 ]
 
 { #category : #running }
-SecureScuttlebutt >> latestParser [
+Sbot >> latestParser [
    "Must be able to parse (malformed) JSON of the form
     {
       'id': '@ZcjYF92reFjUtEYdoJ8ulOI6N6klwAAaIkghEEHdvSE=.ed25519',
@@ -41,8 +43,8 @@ SecureScuttlebutt >> latestParser [
  	^[:str | SsbLatestReader fromString: str] 
 ]
 
-{ #category : #running }
-SecureScuttlebutt >> logStream [
+{ #category : #api }
+Sbot >> logStream [
 	^ self
 		 runSbot: #('createLogStream' '--reverse' '--limit=2')
 	 	 with: self latestParser
@@ -50,34 +52,18 @@ SecureScuttlebutt >> logStream [
 ]
 
 { #category : #printing }
-SecureScuttlebutt >> printOn [
+Sbot >> printOn [
 	^ 'SecureScuttlebutt'
 ]
 
 { #category : #running }
-SecureScuttlebutt >> runSbot: aCommandAndArgs [
-	| process |
-	process := OSSUnixSubprocess new
-		command: 'sbot';
-		arguments: aCommandAndArgs ;
-		redirectStdout;
-		redirectStderr .
-	process runAndWait  .
-	process isSuccess 
-		ifTrue: [ ^ NeoJSONReader fromString:  process stdoutStream upToEndOfFile ]
-		ifFalse: [
-			"OSSUnixProcessExitStatus has a nice #printOn: "
-			"
-			Transcript show: 'Command exit with error status: ', process exitStatusInterpreter printString; cr.
-			Transcript show: 'Stderr contents: ', process stderrStream upToEndOfFile.
-			"
-			self error
-		].
+Sbot >> runSbot: aCommandAndArgs [
+	^ self runSbot: aCommandAndArgs with: [ :str | NeoJSONReader fromString: str ]
 
 ]
 
 { #category : #running }
-SecureScuttlebutt >> runSbot: aCommandAndArgs with: aParser [
+Sbot >> runSbot: aCommandAndArgs with: aParser [
 	| process |
 	process := OSSUnixSubprocess new
 		command: 'sbot';
@@ -98,7 +84,12 @@ SecureScuttlebutt >> runSbot: aCommandAndArgs with: aParser [
 
 ]
 
-{ #category : #running }
-SecureScuttlebutt >> whoami [
+{ #category : #api }
+Sbot >> status [
+	^ self runSbot: #('status')
+]
+
+{ #category : #api }
+Sbot >> whoami [
 	^ self runSbot: #('whoami')
 ]
