@@ -8,6 +8,7 @@ Class {
 BaselineOfSecureScuttlebutt >> baseline: spec [
 	<baseline>
 
+"
 	| repository |
 	
 	repository := self packageRepositoryURL.
@@ -24,3 +25,4 @@ BaselineOfSecureScuttlebutt >> baseline: spec [
 			package: 'SecureScuttlebutt-Tests' with: [
 				spec requires: 'SecureScuttlebutt' ] ].
 ]
+"
