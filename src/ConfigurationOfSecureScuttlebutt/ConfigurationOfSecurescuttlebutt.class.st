@@ -145,12 +145,27 @@ ConfigurationOfSecurescuttlebutt class >> validate [
 { #category : #baselines }
 ConfigurationOfSecurescuttlebutt >> baseline1: spec [
 	<version: '1-baseline'>
+	spec
+		for: #common
+		do: [ spec
+				blessing: #baseline;
+				"package: 'SecureScuttlebutt' with: [ spec requires: 'NeoJSON' ];"
+				"package: 'SecureScuttlebutt' with: [ spec requires: 'OSSubprocess' ];"
+				group: 'default' with: #('SecureScuttlebutt' 'SecureScuttlebutt-DataModel') ]
+]
+
+{ #category : #'symbolic versions' }
+ConfigurationOfSecurescuttlebutt >> bleedingEdge: spec [
+	<symbolicVersion: #'bleedingEdge'>
 	
-	spec for: #common do: [
-		spec
-			blessing: #baseline;
-			repository: 'github://alanz/smalltalk-ssb:master/repository';
-			package: 'SecureScuttlebutt' ]
+
+]
+
+{ #category : #'symbolic versions' }
+ConfigurationOfSecurescuttlebutt >> development: spec [
+	<symbolicVersion: #'development'>
+	
+
 ]
 
 { #category : #accessing }
@@ -176,11 +191,6 @@ ConfigurationOfSecurescuttlebutt >> stable: spec [
 { #category : #versions }
 ConfigurationOfSecurescuttlebutt >> version10: spec [
 	<version: '10' imports: #('1-baseline')>
-	
-	spec for: #common do: [
-		spec
-			blessing: #release
-			"package: 'Securescuttlebutt' with: 'Securescuttlebutt-AlanZimmerman.1' ]"
-]
-
+	spec for: #common do: [ spec blessing: #release
+		 ]
 ]
