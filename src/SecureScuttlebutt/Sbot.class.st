@@ -63,6 +63,12 @@ Sbot >> runSbot: aCommandAndArgs [
 ]
 
 { #category : #running }
+Sbot >> runSbot: aCommandAndArgs as: schema [
+	^ self runSbot: aCommandAndArgs with: [ :str | NeoJSONReader fromString: str as: schema]
+
+]
+
+{ #category : #running }
 Sbot >> runSbot: aCommandAndArgs with: aParser [
 	| process |
 	process := OSSUnixSubprocess new
@@ -86,10 +92,12 @@ Sbot >> runSbot: aCommandAndArgs with: aParser [
 
 { #category : #api }
 Sbot >> status [
-	^ self runSbot: #('status')
+	"^ self runSbot: #('status')"
+	^ self runSbot: #('status') as: SsbStatus 
 ]
 
 { #category : #api }
 Sbot >> whoami [
 	^ self runSbot: #('whoami')
+	"^ self runSbot: #('whoami') as: SsbStatus"
 ]
