@@ -179,8 +179,8 @@ ConfigurationOfSecurescuttlebutt >> version10: spec [
 	
 	spec for: #common do: [
 		spec
-			blessing: #release;
-			package: 'Securescuttlebutt' with: 'Securescuttlebutt' ]
+			blessing: #release
+			"package: 'Securescuttlebutt' with: 'Securescuttlebutt-AlanZimmerman.1' ]"
 ]
 
 ]
