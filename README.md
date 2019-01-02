@@ -6,9 +6,29 @@
 
 ### Installation
 
+From Catalog, install `NeoJSONReader` stable. Ignore warning about
+Pharo 7 not being supported.
+
+
+Install `OSssubProcess`:
+
 ```
 Metacello new
- 	configuration: 'SecureScuttlebutt';
- 	repository: 'github://alanz/smalltalk-ssb:master/repository';
+ 	configuration: 'OSSubprocess';
+ 	repository: 'github://marianopeck/OSSubprocess:master/repository';
 	version: #stable;
 	load.
+```
+
+Use `Iceberg` to clone https://github.com/alanz/ssb-smalltalk.
+
+Right-click on the repo in Iceberg, and select Packages. Install them
+all, one by one.
+
+[PRs gladly accepted on establishing a proper baseline for this]
+
+You should now be able to print
+
+```smalltalk
+Sbot new whoami.
+```
