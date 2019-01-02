@@ -1,3 +1,9 @@
+"
+I am a SsbLatestReader.
+I am a specialised NeoJSONReader.
+
+I can read a top level list of JSON forms separated by whitespace from a stream, and return them as an Array.
+"
 Class {
 	#name : #SsbLatestReader,
 	#superclass : #NeoJSONReader,
@@ -41,11 +47,9 @@ SsbLatestReader >> parseListBareDo: block [
 	"(self matchChar: $]) 
 		ifTrue: [ ^ self ]."
 	[ readStream atEnd ] 
-		whileFalse: [
-			block value.
-          ].
+		whileFalse: [ block value. ].
    "For some reason, the required value is on the top of the stack (according to the debugger), but does not get returned."
-	"^ self"
+	^ self
 	
 ]
 

@@ -1,3 +1,9 @@
+"
+I am a SecureScuttlebutt
+
+I interact with an operating system sbot, which is the secure scuttlebutt CLI
+
+"
 Class {
 	#name : #SecureScuttlebutt,
 	#superclass : #Object,
@@ -38,8 +44,9 @@ SecureScuttlebutt >> latestParser [
 { #category : #running }
 SecureScuttlebutt >> logStream [
 	^ self
-		 runSbot: #('createLogStream' '--reverse' '--limit=1')
+		 runSbot: #('createLogStream' '--reverse' '--limit=2')
 	 	 with: self latestParser
+
 ]
 
 { #category : #printing }
@@ -79,7 +86,7 @@ SecureScuttlebutt >> runSbot: aCommandAndArgs with: aParser [
 		redirectStderr .
 	process runAndWait  .
 	process isSuccess 
-		ifTrue: [ aParser value: process stdoutStream upToEndOfFile ]
+		ifTrue: [ ^ aParser value: process stdoutStream upToEndOfFile ]
 		ifFalse: [
 			"OSSUnixProcessExitStatus has a nice #printOn: "
 			"
